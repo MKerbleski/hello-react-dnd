@@ -2,60 +2,63 @@
   display: flex;
   justify-content: space-around;
 }
-#board__sources {
+
+#start {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.board__sources__source {
+.startObject {
   display: inline-block;
   margin: 5px;
   border-radius: 50%;
   width: 100px;
   height: 100px;
 }
-#board__targets {
+#middle {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.board__targets__target {
+.middleObject {
   display: inline-block;
   margin: 5px;
   width: 100px;
   height: 100px;
+  color: pink;
+  background-color: pink;
 }
-.board__targets__target--circle {
+.middleObject--circle {
   border-radius: 50%;
 }
-.board__targets__target--square {
+.middleObject--square {
   display: inline-block;
 }
-#board__drops {
+#results {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-.board__drops__drop {
+.resultsDiv {
   display: flex;
   justify-content: space-around;
 }
-.board__drops__drop__source {
+.resultColor {
   margin: 5px;
   border-radius: 50%;
   width: 20px;
   height: 20px;
 }
-.board__drops__drop__target {
+.resultShape {
   margin: 5px;
   width: 20px;
   height: 20px;
   background-color: gray;
 }
-.board__drops__drop__target--circle {
+.result--circle {
   display: inline-block;
   border-radius: 50%;
 }
-.board__drops__drop__target--square {
+.result--square {
   display: inline-block;
 }

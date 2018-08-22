@@ -1,52 +1,62 @@
+import './Board.css';
 import React, { Component } from 'react';
+
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import Drop from './Drop';
+
+import EndResult from './EndResult';
 import Source from './Source';
 import Target from './Target';
-import './Board.css';
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.handleDrop = this.handleDrop.bind(this);
     this.state = {
-      drops: [],
+      results: [],
     };
   }
 
   handleDrop(color, shape) {
-    const { drops } = this.state;
-    const nextDrops = [...drops, {
-      color,
-      shape,
-    }];
+    console.log("onDrop via handleDrop", color, shape)
+    let drops2 = this.state.results.slice();
+    // console.log(this.state.results)
+    // console.log(drops2)
+    let newResult = {color, shape}
+    // console.log(newResult)
+    drops2.push({newResult})
+    // console.log(drops2)
     this.setState({
-      drops: nextDrops,
+      results: drops2,
     });
+    // console.log(this.state)
   }
 
   render() {
-    const { drops } = this.state;
+    console.log(this.state)
+    const { results } = this.state;
     return (
       <div id="board">
-        <div id="board__sources">
+        <div id="start">
           <Source color="red" onDrop={this.handleDrop} />
           <Source color="green" onDrop={this.handleDrop} />
           <Source color="blue" onDrop={this.handleDrop} />
         </div>
-        <div id="board__targets">
+        <div id="middle">
           <Target shape="circle" />
           <Target shape="square" />
         </div>
-        <div id="board__drops">
-          {drops.map((drop, i) => (
-            <Drop
-              color={drop.color}
-              key={i}
-              shape={drop.shape}
-            />
-          ))}
+        {console.log(results)}
+        <div id="results">
+          {results.map((result, i) => {
+            return (
+              <EndResult
+                color={result.newResult.color}
+                key={i}
+                shape={result.newResult.shape}
+              />
+            )
+          })}
         </div>
       </div>
     );

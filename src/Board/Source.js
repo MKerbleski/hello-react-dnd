@@ -3,13 +3,16 @@ import { DragSource } from 'react-dnd';
 import { PropTypes } from 'prop-types';
 import { ITEM } from './itemTypes';
 
-const Source = ({ color, connectDragSource, isDragging }) => (
-  connectDragSource(
+
+//also needs to be a stateless functional component
+const Source = (props) => (
+// const Source = ({ color, connectDragSource, isDragging }) => (
+  props.connectDragSource(
     <div
-     className="board__sources__source"
-     style={{ 
-       backgroundColor: color,
-       opacity: isDragging ? 0.25 : 1,
+     className="startObject"
+     style={{
+       backgroundColor: props.color,
+       opacity: props.isDragging ? 0.25 : 1,
       }}
     />
   )
@@ -21,21 +24,28 @@ Source.propTypes = {
   isDragging: PropTypes.bool.isRequired,
 }
 
-const source = {
+const sourceObj = {
   beginDrag(props) {
-    const { color } = props;
+    console.log("beginDrag", props)
+    const { color } = props; //this return just 'green'
+    console.log(color);
+    console.log(props.color); //same thing but props cant be in a return statement?
     return ({
-      color,
+      color
     });
   },
+  //endDrag is called when dropped on a target
   endDrag(props, monitor) {
+    console.log("endDrag", "props", props, "monitor", monitor.getDropResult())
     if (!monitor.didDrop()) {
       return;
     }
-    const { onDrop } = props;
-    const { color } = monitor.getItem();
-    const { shape } = monitor.getDropResult();
-    onDrop(color, shape);
+    // const { onDrop } = props;
+    const  {color}  = monitor.getItem(); //returns just 'blue'
+    // console.log(props.color) // also returns just 'blue'
+
+    const { shape } = monitor.getDropResult();//gets props from the target
+    props.onDrop( color, shape );//onDrop supplied by parent which attaches the color and shape to the props
   },
 };
 
@@ -44,4 +54,5 @@ const collect = (connect, monitor) => ({
   isDragging: monitor.isDragging(),
 });
 
-export default DragSource(ITEM, source, collect)(Source);
+export default DragSource(ITEM, sourceObj, collect)(Source);//HOC that ties the Source together
+// export default DragSource(type, spec, collect)(MyComponent);
