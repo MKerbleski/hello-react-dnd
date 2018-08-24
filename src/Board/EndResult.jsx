@@ -3,8 +3,9 @@ import { PropTypes } from 'prop-types';
 
 console.log(this)
 
-const EndResult = ({ color, shape }) => (
+const EndResult = ({ index, color, shape }) => (
   <div className="resultsDiv">
+    <div>{index}</div>
     <div
       style={{ backgroundColor: color }}
       className="resultColor"
@@ -14,6 +15,7 @@ const EndResult = ({ color, shape }) => (
 );
 
 EndResult.propTypes = {
+  key: PropTypes.number,
   color: PropTypes.string.isRequired,
   shape: PropTypes.string.isRequired,
 };

@@ -15,7 +15,7 @@ const Target = (props) => (
     <div
       className={`middleObject middleObject--${props.shape}`}
       style={{ backgroundColor: props.highlighted ? 'black' : 'gray' }}
-    />
+    >{props.catagory}</div>
   )
 );
 

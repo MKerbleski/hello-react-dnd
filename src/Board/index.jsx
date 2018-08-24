@@ -20,16 +20,11 @@ class Board extends Component {
   handleDrop(color, shape) {
     console.log("onDrop via handleDrop", color, shape)
     let drops2 = this.state.results.slice();
-    // console.log(this.state.results)
-    // console.log(drops2)
     let newResult = {color, shape}
-    // console.log(newResult)
     drops2.push({newResult})
-    // console.log(drops2)
     this.setState({
       results: drops2,
     });
-    // console.log(this.state)
   }
 
   render() {
@@ -38,21 +33,23 @@ class Board extends Component {
     return (
       <div id="board">
         <div id="start">
-          <Source color="red" onDrop={this.handleDrop} />
-          <Source color="green" onDrop={this.handleDrop} />
-          <Source color="blue" onDrop={this.handleDrop} />
+          <Source color="red" id="1" onDrop={this.handleDrop} />
+          <Source color="green" id="2" onDrop={this.handleDrop} />
+          <Source color="blue" id="3" onDrop={this.handleDrop} />
+          <Source color="yellow" id="yellow" onDrop={this.handleDrop} />
         </div>
-        <div id="middle">
+        <div id="middle" style={{border: "1px solid red"}}>
           <Target shape="circle" />
           <Target shape="square" />
         </div>
         {console.log(results)}
         <div id="results">
-          {results.map((result, i) => {
+          {results.map((result, index) => {
             return (
               <EndResult
                 color={result.newResult.color}
-                key={i}
+                key={index}
+                index={index}
                 shape={result.newResult.shape}
               />
             )

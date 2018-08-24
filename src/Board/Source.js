@@ -44,7 +44,7 @@ const sourceObj = {
     const  {color}  = monitor.getItem(); //returns just 'blue'
     // console.log(props.color) // also returns just 'blue'
 
-    const { shape } = monitor.getDropResult();//gets props from the target
+    const { shape } = monitor.getDropResult();//gets props from the target// shape
     props.onDrop( color, shape );//onDrop supplied by parent which attaches the color and shape to the props
   },
 };
